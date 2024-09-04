@@ -26,5 +26,3 @@ function flipCoin() {
     }
   });
 }
-
-flipCoin();
