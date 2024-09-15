@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #doubleHolder {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="doubleHolder">
+      <button class="double">double</button>
+    </div>
+
+    <script>
+      const doubleHolder = document.querySelector("#doubleHolder");
+      const double = document.querySelector(".double");
+      doubleHolder.addEventListener("click", (e) => {
+        console.log(e.target, e.currentTarget);
+        if (e.target.classList.contains("double")) {
+          // create the button 1 and button 2
+          const button1 = document.createElement("button");
+          button1.setAttribute("class", "double");
+          button1.innerHTML = "double";
+
+          const button2 = document.createElement("button");
+          button2.setAttribute("class", "double");
+          button2.innerHTML = "double";
+
+          // append the buttons to the doubleHolder
+          doubleHolder.appendChild(button1);
+          doubleHolder.appendChild(button2);
+
+          // remove the button that was clicked
+          e.currentTarget.removeChild(e.target);
+        }
+      });
+    </script>
+  </body>
+</html>
