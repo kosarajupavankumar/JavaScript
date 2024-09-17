@@ -307,3 +307,302 @@ In each example:
 - `map` transforms each element of the array according to the function provided.
 - `filter` selectively includes elements from the original array based on a condition defined by the provided function.
 - `reduce` iterates over each element of the array, accumulating a final result based on the logic defined in the provided function.
+
+# 8. What are pure and impure functions in JS?
+
+In JavaScript, pure functions and impure functions serve different purposes and have distinct characteristics:
+
+## Pure Functions
+
+- A pure function is a function where the return value is determined only by its input values, without observable side effects.
+- It doesn't modify variables outside of its scope or perform any I/O operations.
+- Given the same input, a pure function will always return the same output.
+- Pure functions are predictable and easier to test.
+
+### Example of a Pure Function
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(2, 3)); // Output: 5
+```
+
+In this example, the `add` function takes two parameters and returns their sum. It doesn't modify any variables outside its scope, and given the same inputs, it always produces the same output.
+
+## Impure Functions
+
+- An impure function is a function that may produce side effects or depends on external factors.
+- It can modify variables outside of its scope, perform I/O operations, or rely on mutable data.
+- Impure functions may not always produce the same output for the same input, making them less predictable.
+
+### Example of an Impure Function
+
+```javascript
+let result = 0;
+
+function impureAdd(a) {
+  result += a; // Modifying external variable 'result'
+  return result;
+}
+
+console.log(impureAdd(2)); // Output: 2
+console.log(impureAdd(3)); // Output: 5
+```
+
+In this example, `impureAdd` modifies the external variable `result` each time it's called. The output of the function depends not only on its input but also on the current state of `result`, making it impure.
+
+## Summary
+
+- Pure functions are predictable and have no side effects.
+- Impure functions may have side effects and rely on external factors.
+
+
+# 9. What are Imperative and Declarative Ways of Writing Code?
+
+Let's compare imperative and declarative styles of writing code in JavaScript, particularly focusing on functions.
+
+## Imperative Programming
+
+In imperative programming, you define the exact steps to achieve a desired result. This often involves explicitly stating how to do something, step by step.
+
+### Example
+
+```javascript
+// Imperative approach to finding the sum of an array
+function sumArray(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+
+console.log(sumArray([1, 2, 3, 4, 5])); // Output: 15
+```
+
+In this imperative style, we explicitly loop through the array, keeping track of the sum by accumulating it with each element.
+
+## Declarative Programming
+
+In declarative programming, you focus more on what you want to achieve rather than how to achieve it. You describe the desired result without specifying the exact steps.
+
+### Example
+
+```javascript
+// Declarative approach to finding the sum of an array using Array.reduce()
+function sumArray(arr) {
+  return arr.reduce((acc, curr) => acc + curr, 0);
+}
+
+console.log(sumArray([1, 2, 3, 4, 5])); // Output: 15
+```
+
+In this declarative style, we use the `reduce()` method, which takes a callback function and an initial value. It abstracts away the looping process and accumulates the sum for us.
+
+## Comparison
+
+- **Imperative**: Focuses on the detailed steps of how to achieve a task. It often involves mutable state and explicit control flow (loops, conditionals).
+- **Declarative**: Focuses on the desired result or outcome. It often involves higher-order functions and functional composition, abstracting away implementation details.
+
+While imperative programming emphasizes the "how," declarative programming emphasizes the "what." Declarative code tends to be more concise and easier to understand once you're familiar with the paradigms and functions being used.
+
+# 10. What is Destructuring in JS?
+
+Destructuring in JavaScript is a concise way to extract values from arrays or properties from objects and assign them to variables. It allows you to unpack values from arrays or objects into distinct variables, making your code cleaner and more readable.
+
+## Array Destructuring
+
+```javascript
+// Example array
+const myArray = [1, 2, 3, 4, 5];
+
+// Destructuring assignment
+const [first, second, ...rest] = myArray;
+
+console.log(first); // Output: 1
+console.log(second); // Output: 2
+console.log(rest); // Output: [3, 4, 5]
+```
+
+In this example, `first` and `second` variables capture the first two elements of the array `myArray`, and the `rest` variable captures the rest of the elements using the rest syntax (`...`).
+
+## Object Destructuring
+
+```javascript
+// Example object
+const myObject = {
+  name: "John",
+  age: 30,
+  country: "USA",
+};
+
+// Destructuring assignment
+const { name, age, country } = myObject;
+
+console.log(name); // Output: John
+console.log(age); // Output: 30
+console.log(country); // Output: USA
+```
+
+In this example, `name`, `age`, and `country` variables capture the corresponding properties of the `myObject`.
+
+## Nested Destructuring
+
+```javascript
+// Nested object
+const person = {
+  name: "Alice",
+  age: 25,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+// Destructuring assignment with nested objects
+const {
+  name,
+  age,
+  address: { city, country },
+} = person;
+
+console.log(name); // Output: Alice
+console.log(age); // Output: 25
+console.log(city); // Output: New York
+console.log(country); // Output: USA
+```
+
+In this example, `city` and `country` variables are extracted from the nested `address` object within the `person` object.
+
+Destructuring provides a cleaner syntax for extracting values from arrays and objects, improving code readability.
+
+# 11. How Does the `this` Keyword Work in JS?
+
+The `this` keyword refers to the context in which a function is executed. Its value depends on how a function is called.
+
+In JavaScript, the value of `this` is determined by the invocation context of the function and can vary based on how a function is called:
+
+## Global Context
+
+When used in the global scope (outside of any function), `this` refers to the global object, which is `window` in a web browser and `global` in Node.js.
+
+```javascript
+console.log(this); // Window in a browser
+console.log(this); // Global in Node.js
+```
+
+## Function Context
+
+Inside a function, the value of `this` depends on how the function is called:
+
+### a. Regular Function
+
+In non-strict mode, `this` inside a regular function refers to the global object, but in strict mode, it defaults to `undefined`.
+
+```javascript
+function myFunction() {
+  return this;
+}
+console.log(myFunction() === window); // true in a browser
+```
+
+### b. Method
+
+When a function is called as a method of an object, `this` refers to the object itself.
+
+```javascript
+const obj = {
+  method() {
+    return this;
+  },
+};
+console.log(obj.method() === obj); // true
+```
+
+### c. Constructor Function
+
+When a function is used as a constructor with the `new` keyword, `this` refers to the newly created object.
+
+```javascript
+function MyClass() {
+  this.property = "value";
+}
+const instance = new MyClass();
+console.log(instance.property); // 'value'
+```
+
+## Event Handlers
+
+In event handler functions, `this` usually refers to the element that triggered the event.
+
+```html
+<button onclick="console.log(this)">Click me</button>
+```
+
+## Explicit Binding
+
+You can explicitly set the value of `this` using `call()`, `apply()`, or `bind()` methods.
+
+```javascript
+function greet() {
+  return `Hello, ${this.name}!`;
+}
+
+const person = { name: "Alice" };
+
+const greetPerson = greet.bind(person);
+console.log(greetPerson()); // Hello, Alice!
+```
+
+Here the `this` keyword will now start pointing to the `person` object.
+
+# 12. What is a Constructor Function in JS?
+
+Constructor functions in JavaScript are a way to create objects with a blueprint or template. They are used to instantiate multiple objects with similar properties and methods.
+
+## Definition
+
+You define a constructor function using the `function` keyword. By convention, constructor functions are named with an initial capital letter to distinguish them from regular functions.
+
+## Properties and Methods
+
+Inside the constructor function, you can define properties and methods using the `this` keyword. These properties and methods will be assigned to each instance of the object created using the constructor function.
+
+## Instantiation
+
+To create an instance of an object using a constructor function, you use the `new` keyword followed by the name of the constructor function.
+
+### Example
+
+```javascript
+// Constructor function for creating Car objects
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+
+  // Method to display car information
+  this.displayInfo = function () {
+    return `This is a ${this.year} ${this.make} ${this.model}`;
+  };
+}
+
+// Creating instances of Car objects
+const car1 = new Car("Toyota", "Camry", 2020);
+const car2 = new Car("Honda", "Civic", 2018);
+
+// Accessing properties and methods of Car objects
+console.log(car1.displayInfo()); // Output: This is a 2020 Toyota Camry
+console.log(car2.displayInfo()); // Output: This is a 2018 Honda Civic
+```
+
+In this example:
+
+- `Car` is a constructor function that defines the blueprint for creating Car objects.
+- `this.make`, `this.model`, and `this.year` are properties of the Car objects.
+- `displayInfo()` is a method of the Car objects that returns a string containing information about the car.
+- `car1` and `car2` are instances of the Car objects created using the `new` keyword.
+
+Using constructor functions allows for code reusability and organization, as you can easily create multiple instances of objects with similar properties and methods.
