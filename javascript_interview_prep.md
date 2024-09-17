@@ -7,16 +7,18 @@ In JavaScript, `let`, `var`, and `const` are used to declare variables, but they
 ## `var`
 
 ### Example 1
+
 ```javascript
 var x = 10;
 if (true) {
-    var x = 20;
-    console.log(x); // 20
+  var x = 20;
+  console.log(x); // 20
 }
 console.log(x); // 20
 ```
 
 ### Example 2
+
 ```javascript
 console.log(y); // undefined
 var y = 70;
@@ -30,6 +32,7 @@ console.log(y); // 70
 ## `let`
 
 ### Example 1
+
 ```javascript
 let a = 10;
 if (true) {
@@ -40,6 +43,7 @@ console.log(a); // 10
 ```
 
 ### Example 2
+
 ```javascript
 // ReferenceError: Cannot access 'b' before initialization
 console.log(b);
@@ -54,6 +58,7 @@ console.log(b); // 5
 ## `const`
 
 ### Example 1
+
 ```javascript
 const PI = 3.14;
 // SyntaxError: Assignment to constant variable
@@ -77,43 +82,51 @@ Hoisting is a behavior in JavaScript where variable and function declarations ar
 Let's go through some examples to illustrate hoisting in JavaScript:
 
 ## Example 1: Variable Hoisting
+
 ```javascript
 console.log(x); // Output: undefined
 var x = 5;
 console.log(x); // Output: 5
 ```
+
 In this example, the variable `x` is hoisted to the top of its scope during the compilation phase. The first `console.log` outputs `undefined` because the declaration is hoisted, but the initialization (`x = 5`) is not hoisted. The second `console.log` outputs `5` after the variable has been initialized.
 
 ## Example 2: Function Hoisting
+
 ```javascript
 sayHello(); // Output: "Hello, World!"
 
 function sayHello() {
-    console.log("Hello, World!");
+  console.log("Hello, World!");
 }
 ```
+
 In this example, the function `sayHello` is hoisted to the top of its scope. That's why we can call the function before its declaration. The output is "Hello, World!" as expected.
 
 ## Example 3: Hoisting with Function Expressions
+
 ```javascript
 greet(); // TypeError: greet is not a function
 
 var greet = function () {
-    console.log("Hello!");
+  console.log("Hello!");
 };
 ```
+
 In this case, the variable `greet` is hoisted, but since it's assigned a function expression (not a function declaration), the assignment is not hoisted. Therefore, when we try to call `greet()` before the assignment, we get a `TypeError` because `greet` is `undefined` at that point.
 
 ## Example 4: Hoisting Inside Functions
+
 ```javascript
 function example() {
-    console.log(a); // Output: undefined
-    var a = 10;
-    console.log(a); // Output: 10
+  console.log(a); // Output: undefined
+  var a = 10;
+  console.log(a); // Output: 10
 }
 
 example();
 ```
+
 Even within functions, variables are hoisted to the top of their scope. In this example, the variable `a` is hoisted within the function `example`.
 
 It's important to understand hoisting in JavaScript, but it's generally considered good practice to declare and initialize variables at the beginning of their scope to avoid confusion and potential issues.
@@ -144,14 +157,14 @@ Let's illustrate lexical scoping and the scope chain with an example:
 
 ```javascript
 function outerFunction() {
-    var outerVar = "I'm outer";
+  var outerVar = "I'm outer";
 
-    function innerFunction() {
-        var innerVar = "I'm inner";
-        console.log(outerVar); // Output: I'm outer
-    }
+  function innerFunction() {
+    var innerVar = "I'm inner";
+    console.log(outerVar); // Output: I'm outer
+  }
 
-    innerFunction();
+  innerFunction();
 }
 
 outerFunction();
@@ -162,15 +175,15 @@ In this example, `innerFunction` has access to the variable `outerVar` declared 
 The scope chain in this example can be visualized as follows:
 
 - **Global Scope**
-    - Contains built-in objects and functions like `console`.
+  - Contains built-in objects and functions like `console`.
 - **outerFunction Scope**
-    - Contains `outerVar`.
-    - Outer scope of `innerFunction`.
+  - Contains `outerVar`.
+  - Outer scope of `innerFunction`.
 - **innerFunction Scope**
-    - Contains `innerVar`.
-    - Inner scope of `outerFunction`.
+  - Contains `innerVar`.
+  - Inner scope of `outerFunction`.
 
-When `innerFunction` tries to access `outerVar`, JavaScript first looks for `outerVar` in its local scope. If it doesn't find it there, it looks in the scope of its parent function, which is `outerFunction`'s scope. If `outerVar` is still not found there, it continues up the scope chain until it reaches the global scope. 
+When `innerFunction` tries to access `outerVar`, JavaScript first looks for `outerVar` in its local scope. If it doesn't find it there, it looks in the scope of its parent function, which is `outerFunction`'s scope. If `outerVar` is still not found there, it continues up the scope chain until it reaches the global scope.
 
 So, in this case, `outerVar` is found in `outerFunction`'s scope, and that's where the value is retrieved from. If the value is not found anywhere up in the hierarchy, then an error is returned.
 
@@ -238,6 +251,7 @@ In this example, `applyOperation` is a higher-order function because it takes an
 - **Flexibility and Extensibility**: Higher-order functions make your code more flexible and extensible by enabling you to pass behavior as arguments or return it as a result.
 
 Overall, higher-order functions are a powerful feature of JavaScript that can lead to more modular, flexible, and expressive code.
+
 # 7. Explain `map`, `filter`, and `reduce` in JS
 
 In JavaScript, `map`, `filter`, and `reduce` are powerful array methods used for manipulating arrays and performing operations on their elements.
@@ -247,6 +261,7 @@ In JavaScript, `map`, `filter`, and `reduce` are powerful array methods used for
 The `map` method creates a new array by applying a function to each element of the original array. It does not modify the original array.
 
 ### Example 1: Doubling each number
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const doubled = numbers.map((num) => num * 2);
@@ -254,6 +269,7 @@ console.log(doubled); // Output: [2, 4, 6, 8, 10]
 ```
 
 ### Example 2: Converting each number to a string
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const stringNumbers = numbers.map((num) => num.toString());
@@ -265,6 +281,7 @@ console.log(stringNumbers); // Output: ['1', '2', '3', '4', '5']
 The `filter` method creates a new array with all elements that pass the test implemented by the provided function, based on a condition.
 
 ### Example 1: Filtering even numbers
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const evenNumbers = numbers.filter((num) => num % 2 === 0);
@@ -272,6 +289,7 @@ console.log(evenNumbers); // Output: [2, 4]
 ```
 
 ### Example 2: Filtering numbers greater than 3
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const greaterThanThree = numbers.filter((num) => num > 3);
@@ -283,21 +301,23 @@ console.log(greaterThanThree); // Output: [4, 5]
 The `reduce` method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
 
 ### Example 1: Summing all numbers
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const sum = numbers.reduce(
-    (accumulator, currentValue) => accumulator + currentValue,
-    0
+  (accumulator, currentValue) => accumulator + currentValue,
+  0
 );
 console.log(sum); // Output: 15
 ```
 
 ### Example 2: Concatenating all numbers as a string
+
 ```javascript
 const numbers = [1, 2, 3, 4, 5];
 const concatenatedString = numbers.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.toString(),
-    ""
+  (accumulator, currentValue) => accumulator + currentValue.toString(),
+  ""
 );
 console.log(concatenatedString); // Output: '12345'
 ```
@@ -357,7 +377,6 @@ In this example, `impureAdd` modifies the external variable `result` each time i
 
 - Pure functions are predictable and have no side effects.
 - Impure functions may have side effects and rely on external factors.
-
 
 # 9. What are Imperative and Declarative Ways of Writing Code?
 
@@ -606,3 +625,184 @@ In this example:
 - `car1` and `car2` are instances of the Car objects created using the `new` keyword.
 
 Using constructor functions allows for code reusability and organization, as you can easily create multiple instances of objects with similar properties and methods.
+
+# 13. What is Asynchronous Programming in JS and how does it work?
+
+Asynchronous JavaScript refers to the ability of JavaScript to execute multiple tasks concurrently without blocking the execution of other tasks. It allows JavaScript code to perform operations such as fetching data from a server, reading files, or executing time-consuming tasks without halting the entire program's execution.
+
+Asynchronous operations are crucial in web development because they enable better responsiveness and efficiency. Without them, tasks that require waiting for resources, like fetching data from an API or reading files, would cause the entire program to freeze, leading to a poor user experience.
+
+Here's a simple example to illustrate asynchronous JavaScript using the `setTimeout()` function:
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+  console.log("Inside setTimeout");
+}, 2000); // Wait for 2 seconds
+
+console.log("End");
+```
+
+In this example, "Start" and "End" will be logged immediately, while "Inside setTimeout" will be logged after a 2-second delay. This delay doesn't block the execution of subsequent code, allowing other operations to continue while waiting for the timeout to finish.
+
+Under the hood, asynchronous JavaScript relies on concepts like event loops and callback functions. When an asynchronous operation is initiated, it's scheduled to be executed later, and meanwhile, the JavaScript engine continues to execute other tasks. Once the asynchronous operation completes, a callback function associated with that operation is placed in the event queue. The event loop continuously checks the event queue and executes the callback functions when the execution stack is empty.
+
+Here's an example using a callback function with `setTimeout()`:
+
+```javascript
+console.log("Start");
+
+function callback() {
+  console.log("Inside setTimeout callback");
+}
+
+setTimeout(callback, 2000); // Wait for 2 seconds
+
+console.log("End");
+```
+
+In this example, the `callback()` function is executed after the timeout, maintaining the asynchronous behavior.
+
+Asynchronous programming in JavaScript has evolved with the introduction of Promises and async/await syntax, providing cleaner and more structured ways to handle asynchronous operations, but the underlying principles remain the same.
+
+# 14. How Asynchronous Programming in JS works?
+
+Asynchronous programming is a programming paradigm that allows tasks to be executed concurrently, enabling non-blocking behavior in applications. In JavaScript, it's commonly used for tasks such as fetching data from a server, handling user input, or performing I/O operations.
+
+Here's a breakdown of how asynchronous programming works in JavaScript, involving the call stack, event loop, and different queues:
+
+- **Call Stack**: The call stack is a mechanism used by JavaScript to keep track of function calls. When a function is called, it's added to the top of the call stack. When a function finishes executing, it's removed from the stack.
+- **Event Loop**: The event loop is a crucial part of asynchronous programming in JavaScript. It continuously checks the call stack and the task queue to determine if there's any work to be done. If the call stack is empty, it takes the first task from the task queue and pushes it onto the call stack for execution.
+- **Task Queue**: The task queue (also known as the callback queue or message queue) holds tasks that are ready to be executed once the call stack is empty. Tasks in the queue are processed in the order they were added.
+
+Now, let's see how these components work together with some code examples:
+
+```javascript
+console.log("Start");
+
+// Asynchronous function with setTimeout
+setTimeout(() => {
+  console.log("Inside setTimeout callback");
+}, 0);
+
+// Synchronous function
+console.log("End");
+```
+
+When this code runs, here's what happens:
+
+1. "Start" is logged to the console.
+2. `setTimeout` is encountered. It schedules a task to be executed asynchronously after a minimum of 0 milliseconds.
+3. "End" is logged to the console.
+4. Since there's no other synchronous code to execute, the event loop checks the call stack. It's empty, so it moves to the task queue.
+5. The task from `setTimeout` is in the task queue. The event loop picks it up and pushes it onto the call stack.
+6. "Inside setTimeout callback" is logged to the console.
+
+This demonstrates how asynchronous code (the callback inside `setTimeout`) is executed after the synchronous code (logging "Start" and "End") has finished, thanks to the event loop.
+
+In more complex scenarios involving asynchronous operations like network requests or file I/O, callbacks or promises are typically used to handle the asynchronous results. These callbacks or promises are added to the task queue once the asynchronous operation completes, and they're executed when the call stack is empty.
+
+# 15. What are all the stages of a promise and how to use a promise?
+
+A Promise in JavaScript represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It has three states:
+
+- **Pending**: Initial state, neither fulfilled nor rejected.
+- **Fulfilled**: The operation completed successfully.
+- **Rejected**: The operation failed.
+
+Here's how you can use a Promise with code examples:
+
+### Example 1: Creating a Promise
+
+```javascript
+const myPromise = new Promise((resolve, reject) => {
+  // Simulating an asynchronous operation (e.g., fetching data)
+  setTimeout(() => {
+    const data = { message: "Promise resolved successfully!" };
+    // Resolve the promise with data
+    resolve(data);
+    // or reject the promise if an error occurs
+    // reject(new Error("Promise rejected!"));
+  }, 2000);
+});
+```
+
+### Example 2: Consuming a Promise
+
+```javascript
+myPromise
+  .then((result) => {
+    // Promise fulfilled, handle the result
+    console.log("Fulfilled:", result);
+  })
+  .catch((error) => {
+    // Promise rejected, handle the error
+    console.error("Rejected:", error);
+  })
+  .finally(() => {
+    // Optional: Perform cleanup or final tasks
+    console.log("Promise completed.");
+  });
+```
+
+In this example:
+
+- **Creating a Promise**:
+
+  - A Promise is created with the `new Promise()` constructor, which takes a function (executor) as an argument.
+  - The executor function receives two parameters: `resolve` and `reject`. These are functions provided by JavaScript to change the state of the Promise.
+  - Inside the executor function, you perform the asynchronous operation. Once the operation is completed, you call `resolve` with the result if successful, or `reject` with an error if it fails.
+
+- **Consuming a Promise**:
+
+  - You use the `then()` method to handle the fulfillment of the Promise. It takes a callback function as an argument, which is called when the Promise is resolved.
+  - You use the `catch()` method to handle the rejection of the Promise. It takes a callback function as an argument, which is called when the Promise is rejected.
+  - You can also use the `finally()` method, which takes a callback function as an argument and is called regardless of whether the Promise is fulfilled or rejected. This is often used for cleanup or final tasks.
+
+- **Promise States**:
+  - If the asynchronous operation inside the Promise executor succeeds, `resolve` is called, transitioning the Promise to the fulfilled state.
+  - If the operation fails, `reject` is called, transitioning the Promise to the rejected state.
+  - While the Promise is in the pending state, it may transition to either fulfilled or rejected, depending on the outcome of the asynchronous operation.
+
+Promises provide a more structured way to handle asynchronous operations compared to callbacks, making code easier to read and maintain, especially when dealing with multiple asynchronous tasks.
+
+# 16. What is async/await and how does it work?
+
+Asynchronous programming in JavaScript traditionally relied heavily on callbacks, which could lead to callback hell and hard-to-read code. To mitigate this issue, JavaScript introduced the async/await syntax as part of ES2017 (ES8). async/await makes asynchronous code look and behave more like synchronous code, which can greatly improve readability and maintainability.
+
+Here's how async/await works:
+
+- **Async Function Declaration (`async`)**:
+
+  - You declare a function as `async` by prefixing it with the `async` keyword. This tells JavaScript that the function will operate asynchronously and may contain `await` expressions inside it.
+
+  ```javascript
+  async function fetchData() {
+    // Asynchronous operations
+  }
+  ```
+
+- **Await Expression (`await`)**:
+
+  - Inside an `async` function, you can use the `await` keyword before an expression that returns a Promise. The `await` keyword pauses the execution of the `async` function until the promise is resolved, and then it resumes the execution with the resolved value.
+
+  ```javascript
+  async function fetchData() {
+    const result = await someAsyncOperation();
+    // code here executes after someAsyncOperation() resolves
+  }
+  ```
+
+- **Promises**:
+
+  - If the expression after `await` is not a Promise, JavaScript automatically wraps it into a resolved Promise. This simplifies error handling, as any errors thrown in the awaited expression will be caught and propagated as rejected Promises.
+
+- **Event Loop Integration**:
+  - When an `async` function is called, it returns a Promise immediately, even if the asynchronous operations inside it haven't completed yet.
+  - When encountering an `await` expression, the JavaScript engine pauses execution of the `async` function and continues executing the rest of the program until the awaited promise settles (either resolves or rejects).
+  - Once the awaited Promise settles, the event loop places the function back into the call stack, allowing it to resume execution with the resolved value (or propagate the rejection).
+
+This asynchronous behavior enables non-blocking execution, allowing other code to run while waiting for I/O operations to complete, which improves performance and responsiveness.
+
+By utilizing async/await, you can write asynchronous code in a more readable and maintainable manner, avoiding the callback pyramid of doom and making error handling more straightforward.
