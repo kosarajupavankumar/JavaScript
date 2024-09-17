@@ -59,6 +59,14 @@ function updateDOM(
   location.innerHTML = locationName;
 
   const time = document.querySelector(".time_location span");
+  // get the day of the week and the time and also date from the local time
+
+  const date = new Date(localTime);
+  const day = date.toLocaleString("en-US", { weekday: "long" });
+  const timeOnly = date.toLocaleString("en-US", { timeStyle: "short" });
+  const dateOnly = date.toLocaleDateString("en-US");
+  localTime = `${timeOnly}, ${day}, ${dateOnly}`;
+
   time.innerHTML = localTime;
 
   const condition = document.querySelector(".weather_condition span");
