@@ -5,6 +5,7 @@
   --green: lightgreen;
   --light: #f0f0f0;
   --dark: black;
+  --red: red;
 }
 
 .toolbox {
@@ -54,6 +55,10 @@
 
 .dark {
   background-color: var(--dark);
+}
+
+.red {
+  color: var(--red);
 }
 
 .action-btn {
@@ -114,13 +119,13 @@
 .ticket_container {
   height: 15rem;
   width: 18rem;
-  background-color: var(--green);
+  background-color: #ecf0f1;
   position: relative;
 }
 
 .ticket_color {
   height: 15%;
-  background-color: var(--pink);
+  /* background-color: var(--pink); */
   text-align: center;
 }
 
