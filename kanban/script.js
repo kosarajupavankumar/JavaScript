@@ -83,6 +83,7 @@ function createTicket(priority, content) {
 
   const lockUnlock = document.createElement("div");
   lockUnlock.classList.add("lock_unlock");
+  lockUnlock.innerHTML = `<i class="fas fa-lock"></i>`;
 
   ticket.append(ticketColor, ticketId, ticketArea, lockUnlock);
   document.querySelector(".pending_count").appendChild(ticket);
