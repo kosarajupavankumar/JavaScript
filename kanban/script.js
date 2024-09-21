@@ -7,6 +7,8 @@ const toolboxPriority = Array.from(
   document.querySelector(".toolbox-priority").children
 );
 
+let ticketArray = [];
+
 deleteButton.addEventListener("click", () => {
   deleteButton.children[0].classList.toggle("red");
 });
@@ -97,6 +99,21 @@ function createTicket(priority, content) {
       e.currentTarget.remove();
     }
   });
+
+  // lock and unlock ticket
+  lockUnlock.addEventListener("click", (e) => {
+    const lockUnlockIcon = e.target;
+    lockUnlockIcon.classList.toggle("fa-lock");
+    lockUnlockIcon.classList.toggle("fa-unlock");
+    ticketArea.contentEditable =
+      ticketArea.contentEditable === "true" ? "false" : "true";
+  });
+
+  ticketArray.push({ id, priority, content });
+
+  console.log(ticketArray);
+
+  localStorage.setItem("ticketArray", JSON.stringify(ticketArray));
 }
 
 function cycleTicketColor(target) {
