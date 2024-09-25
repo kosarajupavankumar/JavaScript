@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Local Storage Example</h2>
+
+    <ul>
+        // main list of items that needs to stored in local storage
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+
+    <button id="read">read</button>
+    <button id="remove">write</button>
+    <button id="add">add</button>
+    <button id="clear">clear</button>
+
+    <script>
+    const read = document.getElementById("read");
+    const remove = document.getElementById("remove");
+    const add = document.getElementById("add");
+
+    read.addEventListener("click", () => {
+      let data = localStorage.getItem("data");
+      if (data === null) {
+        console.log("No data found");
+        data = [];
+      } else {
+        data = JSON.parse(data);
+      }
+      console.log(data);
+    });
+
+    remove.addEventListener("click", () => {
+      const items = Array.from(document.querySelectorAll("ul li")).map(li => li.textContent);
+      localStorage.setItem("data", JSON.stringify(items));
+    });
+
+    add.addEventListener("click", () => {
+        // add new item to the list
+        const ul = document.querySelector("ul");
+        const li = document.createElement("li");
+        li.textContent = "Item " + (ul.children.length + 1);
+        ul.appendChild(li);
+
+        // update local storage
+        const items = Array.from(document.querySelectorAll("ul li")).map(li => li.textContent);
+        localStorage.setItem("data", JSON.stringify(items));
+
+    });
+
+    const clear = document.getElementById("clear");
+    clear.addEventListener("click", () => {
+      localStorage.clear();
+    });
+    </script>
+  </body>
+</html>

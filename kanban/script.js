@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+  loadTicketsFromLocalStorage();
+});
+
 const addButton = document.querySelector(".add_button");
 const deleteButton = document.querySelector(".delete_button");
 const modal = document.querySelector(".model_container");
@@ -7,7 +11,8 @@ const toolboxPriority = Array.from(
   document.querySelector(".toolbox-priority").children
 );
 
-let ticketArray = [];
+let ticketArray = JSON.parse(localStorage.getItem("ticketArray")) || [];
+
 
 deleteButton.addEventListener("click", () => {
   deleteButton.children[0].classList.toggle("red");
@@ -66,8 +71,7 @@ function setActivePriorityColor(target) {
   target.classList.add("active");
 }
 
-function createTicket(priority, content) {
-  const id = Date.now().toString();
+function createTicket(priority, content, id = Date.now().toString()) {
   const ticket = document.createElement("div");
   ticket.classList.add("ticket_container");
 
@@ -97,6 +101,8 @@ function createTicket(priority, content) {
   ticket.addEventListener("click", (e) => {
     if (deleteButton.children[0].classList.contains("red")) {
       e.currentTarget.remove();
+      ticketArray = ticketArray.filter(ticket => ticket.id !== id);
+      localStorage.setItem("ticketArray", JSON.stringify(ticketArray));
     }
   });
 
@@ -109,11 +115,10 @@ function createTicket(priority, content) {
       ticketArea.contentEditable === "true" ? "false" : "true";
   });
 
-  ticketArray.push({ id, priority, content });
-
-  console.log(ticketArray);
-
-  localStorage.setItem("ticketArray", JSON.stringify(ticketArray));
+  if (!ticketArray.some(ticket => ticket.id === id)) {
+    ticketArray.push({ id, priority, content });
+    localStorage.setItem("ticketArray", JSON.stringify(ticketArray));
+  }
 }
 
 function cycleTicketColor(target) {
@@ -122,4 +127,11 @@ function cycleTicketColor(target) {
   let idx = colors.indexOf(currentColor);
   idx = (idx + 1) % colors.length;
   target.style.backgroundColor = colors[idx];
+}
+
+function loadTicketsFromLocalStorage() {
+  const tickets = JSON.parse(localStorage.getItem("ticketArray")) || [];
+  tickets.forEach(ticket => {
+    createTicket(ticket.priority, ticket.content, ticket.id);
+  });
 }
