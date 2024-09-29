@@ -1,30 +1,34 @@
-// Use event delegation to handle the click event
+const container = document.querySelector(".container");
+const increment = document.querySelector("#increment");
 
-const counter = document.querySelector(".counter");
-const countValue = document.getElementById("count");
+// use the event delegation pattern
+container.addEventListener("click", (event) => {
+  const target = event.target;
+  const number = document.querySelector("#number");
+  const currentValue = parseInt(number.textContent, 10);
 
-counter.addEventListener("click", (e) => {
-    const target = e.target;
-
-    // Check if the clicked element is a button
-    if (target.classList.contains("btn")) {
-        const id = target.getAttribute("id");
-
-        // Perform actions based on the button's ID
-        switch (id) {
-            case "increment":
-                countValue.innerHTML = parseInt(countValue.innerHTML) + 1;
-                break;
-            case "decrement":
-                if (parseInt(countValue.innerHTML) > 0) {
-                    countValue.innerHTML = parseInt(countValue.innerHTML) - 1;
-                }
-                break;
-            case "reset":
-                countValue.innerHTML = 0;
-                break;
-            default:
-                break;
-        }
-    }
+  switch (target.id) {
+    case "add":
+      // read the current value of the increment input
+      const incrementValue = parseInt(increment.value, 10);
+      // increment the number value by the increment value
+      // update the number value in the DOM
+      const newValueAdd = currentValue + incrementValue;
+      number.textContent = newValueAdd;
+      break;
+    case "subtract":
+      // read the current value of the increment input
+      const decrementValue = parseInt(increment.value, 10);
+      // decrement the number value by the decrement value
+      // update the number value in the DOM
+      const newValueSubtract = currentValue - decrementValue;
+      number.textContent = newValueSubtract;
+      break;
+    case "reset":
+      // reset the number value to 0
+      number.textContent = 0;
+      break;
+    default:
+      break;
+  }
 });
