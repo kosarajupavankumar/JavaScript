@@ -21,3 +21,17 @@ allStarsDiv.addEventListener("click", (event) => {
         }
     }
 });
+
+// when we doing hover effect it shopuld change to filled 
+allStarsDiv.addEventListener("mouseover", (event) => {
+    if (event.target.classList.contains("star")) {
+        const starValue = parseInt(event.target.getAttribute("data-value"));
+        stars.forEach((star, index) => {
+            if (index < starValue) {
+                star.classList.add("filled");
+            } else {
+                star.classList.remove("filled");
+            }
+        });
+    }
+});
