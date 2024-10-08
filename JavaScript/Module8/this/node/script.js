@@ -3,7 +3,6 @@
 // In global context, this refers to the empty object.
 // console.log(this);
 
-
 // function sayHi(){
 //     console.log(this);
 // }
@@ -16,9 +15,8 @@
 
 // console.log(global);
 
-// window -> browser 
+// window -> browser
 // global -> nodejs
-
 
 // var person = {
 
@@ -32,25 +30,18 @@
 
 // person.sayFullName();
 
-
-
 // Scenario 4: this inside nested functions
 
-
-
 var person = {
+  name: "Utkarsh",
+  age: 31,
+  innerFunction: function () {
+    var nestedFunction = function () {
+      console.log(this);
+    };
 
-    name:"Utkarsh",
-    age:31,
-    innerFunction:function(){
-
-        var nestedFunction = function(){
-            console.log(this);
-        }
-
-        nestedFunction();
-    }
-}
-
+    nestedFunction();
+  },
+};
 
 person.innerFunction();
