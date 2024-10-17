@@ -44,4 +44,4 @@ The application includes interactive UI elements such as buttons for adding and 
 
 ### Responsive Design
 
-The project is styled with responsiveness in mind, meaning it's designed to look and function well on a variety of devices and screen sizes. This adaptability enhances accessibility and user experience across different platforms.
+The project is styled with responsiveness in mind, meaning it's designed to look and function well on a variety of devices and screen sizes. This adaptability enhances accessibility and user experience across different platforms.# Kanban
